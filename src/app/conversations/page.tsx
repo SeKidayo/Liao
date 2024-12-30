@@ -3,7 +3,7 @@
 import clsx from "clsx";
 
 import useConversation from "@/hooks/useConversation";
-import EmptyState from "@/components/ui/empty-state/EmptyState";
+import EmptyState from "@/components/empty-state/EmptyState";
 
 const Conversation = () => {
   const { isOpen, conversationId } = useConversation();

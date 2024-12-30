@@ -4,7 +4,7 @@ import useRouters from "@/hooks/useRoutes";
 import { useState } from "react";
 import DesktopItem from "./DesktopItem";
 import { User } from "@prisma/client";
-import Avatar from "@/components/ui/avatar/Avatar";
+import Avatar from "@/components/avatar/Avatar";
 
 interface DesktopSidebarProps {
   currentUser: User

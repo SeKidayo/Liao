@@ -9,8 +9,8 @@ import {
 
 import { BsGithub } from "react-icons/bs";
 
-import Input from "@/components/basic/input/Input";
-import Button from "@/components/basic/button/Button";
+import Input from "@/components/input/Input";
+import Button from "@/components/button/Button";
 
 import AuthSocialButton from "./AuthSocialButton";
 import axios from "axios";

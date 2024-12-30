@@ -1,6 +1,6 @@
 import getConversationById from "@/actions/getConversationById";
 import getMessages from "@/actions/getMessages";
-import EmptyState from "@/components/ui/empty-state/EmptyState";
+import EmptyState from "@/components/empty-state/EmptyState";
 import Header from './components/Header';
 import Body from './components/Body';
 import Form from './components/Form';

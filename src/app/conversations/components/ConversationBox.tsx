@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import clsx from "clsx";
 import { FullConversationType } from "@/types";
 import useOtherUser from "@/hooks/useOtherUser";
-import Avatar from "@/components/ui/avatar/Avatar";
+import Avatar from "@/components/avatar/Avatar";
 
 interface ConversationBoxProps {
   data: FullConversationType;
