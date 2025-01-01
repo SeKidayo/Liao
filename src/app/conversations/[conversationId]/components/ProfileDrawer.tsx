@@ -12,7 +12,7 @@ import {
 } from "@headlessui/react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import Avatar from "@/components/avatar/Avatar";
-import Modal from "@/components/modal/Button";
+import Modal from "@/components/modal/Modal";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
