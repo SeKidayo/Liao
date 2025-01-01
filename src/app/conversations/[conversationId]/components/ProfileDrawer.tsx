@@ -195,13 +195,13 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                                 justify-center
                               "
                               >
-                                <IoTrash size={24} />
+                                <IoTrash size={24} className="text-red-600" />
                               </div>
                               <div
                                 className="
                                 text-sm
                                 font-light
-                                text-neutral-600
+                                text-red-600
                               "
                               >
                                 Delete
