@@ -12,7 +12,7 @@ import {
 } from "@headlessui/react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import Avatar from "@/components/avatar/Avatar";
-import Modal from "@/components/modal/Modal";
+import ConfirmModal from "@/components/confirm-modal/ComfirmModal";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -28,7 +28,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
   data,
 }) => {
   const otherUser = useOtherUser(data);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createAt), "PP");
@@ -48,14 +48,14 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
   return (
     <>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+      <ConfirmModal
+        isOpen={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
       >
         <div className="bg-white p-5">
           <p>Hello Modal!</p>
         </div>
-      </Modal>
+      </ConfirmModal>
       <Transition show={isOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -174,7 +174,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                           </div>
                           <div className="flex gap-10 my-8">
                             <div
-                              onClick={() => setIsModalOpen(true)}
+                              onClick={() => setConfirmOpen(true)}
                               className="
                               flex
                               flex-col
