@@ -55,7 +55,11 @@ const AuthForm = () => {
     if (variant === 'REGISTER') {
       axios.post('/api/register', data)
       .then(() => {
-        router.push('/users');
+        signIn('credentials', {
+          ...data,
+          redirect: false
+        });
+        toast.success('注册成功');
       })
       .catch(() => {
         toast.error('无法注册，请重试');
