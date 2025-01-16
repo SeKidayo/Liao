@@ -12,6 +12,7 @@ import {
 } from "@headlessui/react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import Avatar from "@/components/avatar/Avatar";
+import AvatarGroup from "@/components/avatar-group/AvatarGroup";
 import ConfirmModal from "@/components/confirm-modal/ComfirmModal";
 
 interface ProfileDrawerProps {
@@ -48,10 +49,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 
   return (
     <>
-      <ConfirmModal
-        isOpen={confirmOpen}
-        onClose={() => setConfirmOpen(false)}
-      >
+      <ConfirmModal isOpen={confirmOpen} onClose={() => setConfirmOpen(false)}>
         <div className="bg-white p-5">
           <p>Hello Modal!</p>
         </div>
@@ -166,7 +164,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                       >
                         <div className="flex flex-col items-center">
                           <div className="mb-2">
-                            <Avatar currentUser={otherUser} />
+                            {data.isGroup ? (
+                              <AvatarGroup users={data.users} />
+                            ) : (
+                              <Avatar currentUser={otherUser} />
+                            )}
                           </div>
                           <div>{title}</div>
                           <div className="text-sm text-gray-500">
@@ -216,7 +218,34 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                               sm:space-y-6
                               sm:px-6
                             "
-                            >
+                            > 
+                              {
+                                data.isGroup && (
+                                  <div>
+                                    <dt className="
+                                      text-sm
+                                      font-medium
+                                      text-gray-500
+                                      sm:w-40
+                                      sm:flex-shrink-0
+                                    ">
+                                      Emails
+                                    </dt>
+                                    <dd
+                                      className="
+                                        mt-1
+                                        text-sm
+                                        text-gray-900
+                                        sm:col-span-2
+                                      "
+                                    >
+                                      {data.users.map((user) => (
+                                        <div key={user.id}>{user.email}</div>
+                                      ))}
+                                    </dd>
+                                  </div>
+                                )
+                              }
                               {!data.isGroup && (
                                 <div>
                                   <dt

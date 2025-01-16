@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/button/Button";
 import Input from "@/components/input/Input";
 import Modal from "@/components/modal/Modal";
 import Select from "@/components/select/Select";
@@ -42,12 +43,13 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
 
-    axios.post('/api/conversions', {
+    axios.post('/api/conversations', {
       ...data,
-      igGroup: true,
+      isGroup: true,
     }).then(() => {
-      // TODO
       onClose();
+      // router.refresh(); // TODO 不生效?
+      window.location.reload(); // but 不太友好
     }).catch(() => {
       toast.error('Failed to create group chat');
     }).finally(() => {
@@ -89,6 +91,30 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
               />
             </div>
           </div>
+        </div>
+        <div
+          className="
+            mt-6
+            flex
+            items-center
+            justify-end
+            gap-x-6
+          "
+        >
+          <Button
+            disabled={isLoading}
+            onClick={onClose}
+            type="button"
+            secondary
+          >
+            Cancel
+          </Button>
+          <Button
+            disabled={isLoading}
+            type="submit"
+          >
+            Create
+          </Button>
         </div>
       </form>
     </Modal>
