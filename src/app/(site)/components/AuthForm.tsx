@@ -148,6 +148,7 @@ const AuthForm = () => {
             register={register}
             errors={errors}
             disabled={isLoading}
+            isAutoComplete
           />
           <Input
             id="password"
