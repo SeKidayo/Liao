@@ -1,6 +1,7 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 import prisma from "@/libs/prismadb";
+import { pusherServer } from "@/libs/pusher";
 
 export async function POST(
   request: Request,
@@ -66,6 +67,17 @@ export async function POST(
           }
         }
       }
+    })
+
+    // 告知自身用户新发送一条消息
+    await pusherServer.trigger(conversationId, 'messages:new', newMessage);
+    const latsMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
+    // 向关联用户推送消息
+    updatedConversation.users.map((user) => {
+      pusherServer.trigger(user.email!, 'conversation:update', {
+        id: conversationId,
+        messages: [latsMessage]
+      })
     })
 
     return NextResponse.json(newMessage);

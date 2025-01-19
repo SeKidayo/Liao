@@ -1,6 +1,7 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 import prisma from '@/libs/prismadb';
+import { pusherServer } from "@/libs/pusher";
 
 interface IParams {
   conversationId?: string;
@@ -61,6 +62,19 @@ export async function POST(
         }
       }
     });
+
+    await pusherServer.trigger(currentUser.email, 'conversation:update', {
+      id: conversationId,
+      messages: [updatedMessage]
+    });
+
+    // 如果最后一条是自己看到,返回所有消息
+    if (lastMessage.seenIds.indexOf(currentUser.id) !== 1) {
+      return NextResponse.json(conversation);
+    }
+
+    // 如果最后一条消息是他人发的,自己看到;则触发推送
+    await pusherServer.trigger(conversationId!, 'message:update', updatedMessage);
 
     return NextResponse.json(updatedMessage);
 
